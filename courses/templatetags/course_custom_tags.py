@@ -13,6 +13,6 @@ def cal_sellprice(price,discount):
 
 @register.filter
 def rupee(price):
-    return f' ${price} '
+    return f' ₹{price} '
     
 

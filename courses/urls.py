@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path,include 
-from courses.views import home,coursePage
+from courses.views import home,coursePage,SignupView,LoginView,signout,checkout,verifyPayment
 from django.conf.urls.static import static
 from project.settings import MEDIA_ROOT,MEDIA_URL
 
@@ -11,8 +11,13 @@ from project.settings import MEDIA_ROOT,MEDIA_URL
 
 urlpatterns = [
     path('',home,name='home'),
-    path('course/<str:slug>',coursePage,name='coursepage')
-   
+    path('logout',signout,name='logout'),
+    path('signup',SignupView.as_view(),name='signup'),
+    path('login',LoginView.as_view(),name='login'),
+    path('course/<str:slug>',coursePage,name='coursepage'),
+    path('check-out/<str:slug>',checkout,name='checkpage'),
+    path('verify_payment',verifyPayment,name='verify_payment')
+    
 ]
 
 urlpatterns += static(MEDIA_URL, document_root = MEDIA_ROOT)

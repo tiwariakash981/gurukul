@@ -5,3 +5,13 @@
 #overflow-y-scroll {
     overflow-y: scroll;
 }
+.display-5{
+    font-size: 35px;
+}
+.active-videos{
+    background-color: rgb(144, 184, 240);
+    color: black;
+}
+a:hover{
+    text-decoration: none;
+}

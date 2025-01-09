@@ -1,5 +1,7 @@
 from django.db import models 
 from courses.models import Course
+from django.contrib.auth.models import User
+
 
 class Video(models.Model):
     title = models.CharField(max_length=20,null=False)
@@ -8,11 +10,12 @@ class Video(models.Model):
     video_id = models.CharField(max_length=100,null=False)
     is_preview = models.BooleanField(default=False)
     
-    def __str__(self):
+    def __str__(self): # pylint: disable=invalid-str-returned
         return self.title
     
     
     
+
 
 
 

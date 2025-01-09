@@ -127,8 +127,11 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
 
+KEY_ID = 'rzp_test_RioZ8JNo07BL1A' 
+KEY_SECRET = 'Z4IT4YsRp7yKz8b2eUbPqCUB'
 
 
+	
 
 
 

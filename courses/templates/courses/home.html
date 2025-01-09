@@ -4,10 +4,12 @@
 home
 {% endblock %}
 {% block start %}
+
 <style>
     .price {
         font-size: 20px;
     }
+
 </style>
 <div class="container">
     <br><br>
@@ -34,7 +36,7 @@ home
                 </div>
                 <div class="card-footer p-0">
                     <div class="row g-0">
-                        <div class="col border-right"> <a href="" class="btn btn-light w-100">Enroll Now</a></div>
+                        <div class="col border-right"> <a href="/check-out/{{course.slug}}" class="btn btn-light w-100"> Enroll Now</a></div>
                         <div class="col border"> <a href="/course/{{course.slug}}" class="btn btn-light w-100">Show More</a></div>
                     </div>
                 </div>

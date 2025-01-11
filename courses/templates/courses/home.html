@@ -9,43 +9,55 @@ home
     .price {
         font-size: 20px;
     }
-
 </style>
+
 <div class="container">
     <br><br>
     <div class="row">
         {% for course in courses %}
-        <div class="col mx-auto">
-            <div class="card mx-auto" style="width: 18rem;">
-                <img src="{{course.thumbnail.url}}"
-                    class="card-img-top" alt="no">
+        <!-- Each card will occupy 4 columns in medium screens, adjust as needed -->
+        <div class="col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="no">
                 <div class="card-body">
                     <h5 class="card-title">{{course.name}}</h5>
                     <p class="card-text m-0 p-0">
                         Save {{course.discount}}%
                         <br>
                         <span class="price">
-                            <del>  {{course.price | rupee}} </del>
+                            <del>{{course.price | rupee}}</del>
                             &nbsp;
                             <span> {% cal_sellprice course.price course.discount as value %}
                                 {{value | rupee}}
-
                             </span>
                         </span>
                     </p>
                 </div>
+
                 <div class="card-footer p-0">
-                    <div class="row g-0">
-                        <div class="col border-right"> <a href="/check-out/{{course.slug}}" class="btn btn-light w-100"> Enroll Now</a></div>
-                        <div class="col border"> <a href="/course/{{course.slug}}" class="btn btn-light w-100">Show More</a></div>
+                    {% is_enrolled request course as enrolled %}
+                    <div class="row no-gutters">
+                        {% if enrolled %}
+                        <div class="col border-right">
+                            <a href="/" class="btn btn-light w-100">
+                                Start Course</a>
+                        </div>
+                        {% else %}
+                        <div class="col border-right">
+                            <a href="/check-out/{{course.slug}}" class="btn btn-light w-100">
+                                Enroll Now</a>
+                        </div>
+                        <div class="col">
+                            <a href="/course/{{course.slug}}" class="btn btn-light w-100">Show
+                                More</a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-
         {% endfor %}
     </div>
-
 </div>
 
 {% endblock %}

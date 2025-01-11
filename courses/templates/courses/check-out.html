@@ -54,9 +54,9 @@ check-out
     </div>
 
 </div>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 {% if order is not None %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
     var options = {
@@ -79,8 +79,17 @@ check-out
     };
     var rzp1 = new Razorpay(options);
     rzp1.open();
-</script>
 
+
+</script>
+{% endif %}
+
+{% if error is not None %}
+<script>
+    window.onload = ()=>{
+        alert('{{error}}')
+    }
+</script>  
 
 {% endif %}
 {% endblock %}

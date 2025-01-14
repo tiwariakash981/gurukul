@@ -1,18 +1,18 @@
 from django.contrib import admin
 from django.urls import path,include 
-from courses.views import home,coursePage,SignupView,LoginView,signout,checkout,verifyPayment,my_courses
+from courses.views import HomePageView,coursePage,SignupView,LoginView,signout,checkout,verifyPayment,MyCourseList
 from django.conf.urls.static import static
 from project.settings import MEDIA_ROOT,MEDIA_URL
-
+ 
 # username: akash (for superuser)
 # Email address: tiwariakash981@gmail.com
 # password: tiwari
 
 
 urlpatterns = [
-    path('',home,name='home'),
+    path('',HomePageView.as_view(),name='home'),
     path('logout',signout,name='logout'),
-    path('my-courses',my_courses,name='my-courses'),
+    path('my-courses',MyCourseList.as_view(),name='my-courses'),
     path('signup',SignupView.as_view(),name='signup'),
     path('login',LoginView.as_view(),name='login'),
     path('course/<str:slug>',coursePage,name='coursepage'),

@@ -5,8 +5,33 @@ from django.contrib.auth.forms import UserCreationForm
 from courses.forms import RegistrationForm
 from courses.forms import LoginForm
 from django.views import View
-from django.contrib.auth import logout
+from django.contrib.auth import logout,login
+from django.views.generic.edit import FormView 
 
+class SignupView(FormView):
+    template_name = 'courses/signup.html'
+    form_class = RegistrationForm
+    success_url = 'login'
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_vaild(form)
+
+class LoginView(FormView):
+    template_name = 'courses/login.html'
+    form_class = LoginForm
+    success_url = '/'
+
+    def form_valid(self,form):
+        login(self.request,form.cleaned_data)
+        next_page = self.request.GET.get('next')
+        if next_page is not None:
+            return redirect(next_page)
+        return super().form_valid(form) 
+
+
+'''
+#ye commented wala normal function based view hai 
 class SignupView(View):
     def get(self,request):
         form = RegistrationForm()
@@ -19,7 +44,8 @@ class SignupView(View):
             if (user is not None):
                 return redirect('login')
         return render(request,template_name = 'courses/signup.html',context={'form':form})
-
+'''
+'''
 class LoginView(View):
     def get(self,request):
         form = LoginForm()
@@ -36,7 +62,7 @@ class LoginView(View):
         if(form.is_valid()):
                 return redirect('home')
         return render(request,'courses/login.html',context=context)
-
+'''
 
 def signout(request):
     logout(request)

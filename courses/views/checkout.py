@@ -5,17 +5,18 @@ from courses.models import Course,Video,Payment,UserCourse
 from project.settings import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required  
 
 import razorpay 
 client = razorpay.Client(auth=(KEY_ID,KEY_SECRET))
 
-
+@login_required(login_url='login')
 def checkout(request,slug):
     course = Course.objects.get(slug=slug)
-    user = None
-    if request.user.is_authenticated is False:
-        return redirect('login')
+    # user = None
+
+    # if request.user.is_authenticated is False:
+    #     return redirect('login')
 
     user = request.user
     action=request.GET.get('action')

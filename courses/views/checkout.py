@@ -87,7 +87,7 @@ def verifyPayment(request):
             payment.save()
 
 
-            return render(request, template_name='courses/my_courses.html',context={})
+            return redirect('my-courses')
         except:
             return HttpResponse('Invalid Payment Details')
 

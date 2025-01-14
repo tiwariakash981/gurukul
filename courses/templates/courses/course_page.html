@@ -17,6 +17,9 @@ home
 {% block start %}
 
 <style>
+    .no-preview{
+        cursor:not-allowed;
+    }
     .active-videos {
         background-color: rgb(135, 206, 235) !important;
 
@@ -64,10 +67,15 @@ home
                 <!-- lecture list  -->
                 <div class="col-3">
                     <ul id="video_list" class="overflow-y-scroll list-group">
+                        {% is_enrolled request course as enrolled %}
                         {% for v in videos %}
                         <li class="list-group-item {% if v == video %} active-videos {% endif %}">
-                            <a class=" {% if v == video %} active-video-link {% endif %}"
+
+                            <a class=" 
+                            {% if not v.is_preview and not enrolled %} text-muted no-preview {% endif %}
+                            {% if v == video %} active-video-link {% endif %}"
                                 href="?lecture={{v.serial_number}}">{{v}}</a>
+
                         </li>
                         {% endfor %}
 

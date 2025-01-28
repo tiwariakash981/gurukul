@@ -23,15 +23,20 @@ def checkout(request,slug):
     order=None
     payment = None
     error = None
+    amount = None
+    try:
+        user_course = UserCourse.objects.get(user = user,course = course)# pylint: disable=no-member
+        error = 'you are already enrolled in this course'
+    except:
+        pass 
+    if error is None:
+        amount = int((course.price - (course.price * course.discount * 0.01))*100)
+    if amount == 0:
+        userCourse = UserCourse(user=user,course=course)
+        userCourse.save()
+        return redirect('my-courses')
+
     if action=='create_payment':
-        try:
-            user_course = UserCourse.objects.get(user = user,course = course)# pylint: disable=no-member
-            error = 'you are already enrolled in this course'
-        except:
-            pass 
-        
-        if error is None:
-            amount = int((course.price - (course.price * course.discount * 0.01))*100)
             currency = 'INR'
             notes = {
                 'email':user.email,

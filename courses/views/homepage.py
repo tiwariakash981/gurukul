@@ -6,7 +6,7 @@ from django.views.generic import ListView
 
 class HomePageView(ListView):
     template_name='courses/home.html'
-    queryset= Course.objects.all()
+    queryset= Course.objects.filter(active=True)
 
 #yaha bydefault context = object_list hota hai
 #context_object_name = 'courses' ye use karne ka agar context ka use karna hai to 

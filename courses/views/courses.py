@@ -26,36 +26,50 @@ def my_courses(request):
     return render(request=request,template_name='courses/my_courses.html',context=context)
 '''
 
-
-def coursePage(request,slug):
-
-    course = Course.objects.get(slug=slug) #pylint: disable=no-member
+def coursePage(request, slug):
+    course = Course.objects.get(slug=slug)  # pylint: disable=no-member
     serial_number = request.GET.get('lecture')
-    videos = course.video_set.all().order_by('serial_number')
+    videos = course.video_set.all().order_by('serial_number')  # pylint: disable=no-member
+
+    
+    next_lecture = None
+    prev_lecture = None
+
+    
     if serial_number is None:
         serial_number = 1
-    video = Video.objects.get(serial_number=serial_number,course=course)# pylint: disable=no-member
+    else:
+        serial_number = int(serial_number)
 
-    if (video.is_preview is False):
-            
-        if (request.user.is_authenticated is False): 
+    
+    if serial_number > 1:
+        prev_lecture = serial_number - 1
+    if serial_number < len(videos):
+        next_lecture = serial_number + 1
+
+    
+    video = Video.objects.get(serial_number=serial_number, course=course)  # pylint: disable=no-member
+
+    
+    if not video.is_preview:
+        if not request.user.is_authenticated:
             return redirect('login')
-        else:
-            user = request.user
-            try:
-                user_course = UserCourse.objects.get(user=user,course=course)
+        try:
+            user_course = UserCourse.objects.get(user=request.user, course=course)
+        except UserCourse.DoesNotExist:
+            return redirect('check-out', slug=course.slug)
 
-            except:
-                return redirect('check-out',slug=course.slug)
+
     context = {
-        'course':course,
-        'video':video,
-        'videos':videos,
-
+        'course': course,
+        'video': video,
+        'videos': videos,
+        'next_lecture': next_lecture,
+        'prev_lecture': prev_lecture,
     }
-       
-    return render(request,template_name='courses/course_page.html',
-    context={'slug':slug,'course':course,'video':video,'videos':videos})
+
+    return render(request, template_name='courses/course_page.html', context=context)
+
     
 
 

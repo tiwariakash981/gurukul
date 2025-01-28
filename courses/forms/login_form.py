@@ -5,6 +5,7 @@ from django import forms
 from django.contrib.auth import authenticate,login
 
 
+
 class LoginForm(AuthenticationForm):
     username = forms.EmailField(max_length=25,required=True,label='Email Address')
     def clean(self):

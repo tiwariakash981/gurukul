@@ -1,6 +1,9 @@
 from django.shortcuts import render
 import pandas as pd
 import pickle
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
+
 
 # Load preprocessor and model
 with open('courses/views/model_linear.pkl', 'rb') as file:

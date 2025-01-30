@@ -1,0 +1,182 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+{% extends 'courses/base.html' %}
+{% load static %}
+{% block title %}
+about 
+{% endblock %}
+
+{% block start %}
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h2 class="w3ltop-title pt-4  ">  About Us</h2>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">Home</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> About </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//breadcrumb-->
+    <!-- feature with photo1 -->
+    <section class="w3l-feature-with-photo-1">
+        <div class="feature-with-photo-hny py-5">
+            <div class="container py-lg-5">
+                <div class="feature-with-photo-content">
+                    <div class="ab-in-flow row mb-lg-5 mb-3">
+
+                        <div class="col-lg-7 ab-right pl-lg-5">
+                            <h6 class="title-subhny mb-2"><span>About Us</span></h6>
+                            <h3 class="title-w3l mb-4">We've Mastered The Art Of Technical Education & Skill Development
+
+                            </h3>
+                            <p class="mt-4">At Gurukul, we offer high-quality technical courses that turn beginners into industry-ready professionals. Our expertise includes Data Science & AI (ML, AI, data analysis), Cloud Computing (AWS, Azure, Google Cloud), Mobile Development (Android, iOS, cross-platform), and DevOps & Tools (modern development practices).</p>
+
+                            <div class="w3l-buttons mt-sm-5 mt-4">
+                                <a class="btn btn-primary btn-style me-2" href="about">Read More </a>
+                                <a class="btn btn-outline-primary btn-style mr-2" href="courses">Courses </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 ab-left ps-lg-5">
+                            <img src="{% static 'courses/image/ab1.jpg' %}" alt="" class="radius-image img-fluid">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //feature with photo1 -->
+
+
+    <!--/progress-->
+    <section class="w3l-servicesblock w3l-servicesblock1 py-5" id="progress">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <div class="row">
+                <div class="col-lg-6 mb-lg-0 mb-5 pe-lg-5">
+                    <h6 class="title-subhny mb-2">Courses available in approx percentage</h6>
+
+                    <h3 class="title-w3l">Gurukul: The Eternal Bond of Guru-Shishya in the Age of Modern Science
+                    </h3>
+                    <p class="mt-md-4 mt-3">The Guru-Shishya tradition, seen in Dronacharya-Arjuna and Vishwamitra-Rama, has long nurtured wisdom and mastery. While ancient Gurukuls imparted values, modern science expands knowledge. At Gurukul, we merge this timeless learning with cutting-edge fields like AI, Data Science, and Cloud Computing, shaping not just professionals but enlightened individuals for the future.</p>
+
+                </div>
+                <div class="col-lg-6 align-self pe-lg-4">
+                    <div class="progress-info info1">
+                        <h6 class="progress-tittle">Data Analytics <span class="">66%</span></h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width:66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-info info1">
+                        <h6 class="progress-tittle">Python <span class="">70%</span></h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width:70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-info info2">
+                        <h6 class="progress-tittle">PHP <span class="">80%</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width:80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-info info3">
+                        <h6 class="progress-tittle">Aerodynamics <span class="">90%</span></h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--//progress-->
+    <!--/w3l-project-->
+
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/theme-change.js"></script>
+    <!--/Tabs-->
+    <script src="assets/js/jquery-1.9.1.min.js"></script>
+    <script src="assets/js/easyResponsiveTabs.js"></script>
+    <!--Plug-in Initialisation-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Horizontal Tab
+            $('#parentHorizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                tabidentify: 'hor_1', // The tab groups identifier
+                activate: function(event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#nested-tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+        });
+
+    </script>
+    <!--//Tabs-->
+    <!-- MENU-JS -->
+    <script>
+        $(window).on("scroll", function() {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function() {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function() {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+
+    </script>
+    <!-- //MENU-JS -->
+
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function() {
+            $('.navbar-toggler').click(function() {
+                $('body').toggleClass('noscroll');
+            })
+        });
+
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+
+    <!-- //bootstrap -->
+    <script src="assets/js/bootstrap.min.js"></script>
+{% endblock %} 

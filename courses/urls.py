@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include 
-from courses.views import HomePageView,coursePage,SignupView,LoginView,signout,checkout,verifyPayment,MyCourseList,predict
+from courses.views import HomePageView,coursePage,SignupView,LoginView,signout,checkout,verifyPayment,MyCourseList,predict,about,index
+
 
 from django.conf.urls.static import static
 from project.settings import MEDIA_ROOT,MEDIA_URL
@@ -11,7 +12,8 @@ from project.settings import MEDIA_ROOT,MEDIA_URL
 
 
 urlpatterns = [
-    path('',HomePageView.as_view(),name='home'),
+    path('',index,name='index'),
+    path('courses',HomePageView.as_view(),name='courses'),
     path('logout',signout,name='logout'),
     path('my-courses',MyCourseList.as_view(),name='my-courses'),
     path('signup',SignupView.as_view(),name='signup'),
@@ -20,6 +22,9 @@ urlpatterns = [
     path('check-out/<str:slug>',checkout,name='check-out'),
     path('verify_payment',verifyPayment,name='verify_payment'),
     path('mlmodel',predict,name='mlmodel'),
+    path('about',about,name='about'),
+    # path('index',index,name='index'),
+    
 
     
 ]

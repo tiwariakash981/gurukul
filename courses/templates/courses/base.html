@@ -3,93 +3,252 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    {% block title %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'courses/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'courses/css/style-starter.css' %}">
+    <link href="//fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    {% block head %}
     {% endblock %}
-  </title>
-
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="{% static 'courses/css/common.css' %}">
-
-  {% block css %}
-  {% endblock %}
 
 
+    {% block css %}
+    {% endblock %}
 
 </head>
 
 <body>
+    <!-- Navbar content -->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                    <img src="{% static 'courses/image/gurukul.png' %}" alt="Logo" width="150" height="auto">
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/courses">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mlmodel">ML Model</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
 
-  <!-- Navbar content -->
-  <nav class="navbar navbar-expand-lg navbar-light "  >
-    <a class="navbar-brand" href="/">
-      <img src="{% static 'courses/image/gurukul.png' %}" alt="Logo" width="150" height="auto">
-  </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" [-data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-
-      <!-- Right -->
-      <ul class="navbar-nav me-auto ">
-        <li class="nav-item active">
-          <a class="nav-link " href="/">Home <span class="sr-only"></span></a>
-        </li>
-      </ul>
-      <!-- Left -->
-      <ul class="navbar-nav ms-auto">
-        {% if request.user.is_authenticated %}
-
-        <li class="nav-item">
-          <a class="nav-link" href="/my-courses">My Courses</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="/mlmodel">ML Model</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
-        {% else %}
-
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">Signup</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
-  {% block start %}
-
-  {% endblock %}
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha384-pvOBnrmpG0wV4rm8r8LSBaEnl/W+fzz29ZoMjfgv3gfK5P5mC2EqkAgPv7ImVGc4"
-    crossorigin="anonymous"></script>
-
-  <!-- Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my-courses">My Courses</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav search-right mt-lg-0 mt-2">
+                        <li class="nav-item" title="Search">
+                            <!-- <a href="#search" class="search-search"> -->
+                            <!-- <span class="fas fa-search" aria-hidden="true"></span> -->
+                            <!-- </a> -->
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item me-lg-3">
+                            <a href="/logout"
+                                class="phone-btn btn btn-primary btn-style d-none d-lg-block btn-style ms-2">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item me-lg-3">
+                            <a href="/login"
+                                class="phone-btn btn btn-primary btn-style d-none d-lg-block btn-style ms-2">Login</a>
+                        </li>
+                        <li class="nav-item me-lg-3">
+                            <a href="/signup"
+                                class="phone-btn btn btn-primary btn-style d-none d-lg-block btn-style ms-2">Signup</a>
+                        </li>
+                        {% endif %}
+                    </ul>
 
 
+                </div>
+            </nav>
+        </div>
+    </header>
+    {% block start %}
 
-{% block js %}
-{% endblock %}
+    {% endblock %}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha384-pvOBnrmpG0wV4rm8r8LSBaEnl/W+fzz29ZoMjfgv3gfK5P5mC2EqkAgPv7ImVGc4"
+        crossorigin="anonymous"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
+    <!-- ye footer ke upar thoda gap dega isko home.html aur kai sare jagah pe laga lena  -->
+    <!--/w3l-project-->
+    <section class="w3l-project-main">
+        <div class="container">
+            <div class="w3l-project py-md-5 py-4">
+                <div class="row py-5 align-items-center">
+                    <div class="col-lg-6 w3l-project-right">
+                        <div class="bottom-info">
+                            <div class="header-section pr-lg-5">
+                                <!-- <h6 class="title-subhny mb-2">Stay Update!</h6> -->
+                                <!-- <h3 class="title-w3l">Subscribe to our newsletter -->
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 w3l-project-left">
+                        <form action="#" method="post" class="subscribe-wthree mt-lg-5 mt-4">
+                            <div class="flex-wrap subscribe-wthree-field">
+                                <!-- <input class="form-control" type="email" placeholder="Your Email Address" name="email" required=""> -->
+                                <!-- <button class="btn btn-style btn-primary" type="submit">Subscribe</button> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//w3l-project-->
+
+    <!-- footer -->
+    <!-- ye main footer blackish color wala code hai  -->
+    <section class="w3l-footer-29-main">
+        <div class="footer-29 py-5">
+            <div class="container py-lg-4">
+                <div class="row footer-top-29">
+                    <div class="col-lg-4 col-md-6 footer-list-29 footer-1 pe-lg-5">
+                        <div class="footer-logo mb-4">
+                            <h2><a class="navbar-brand" href="/">
+                                    <span class="sublog">Gur</span>ukul
+                                </a></h2>
+                        </div>
+                        <p>Where spirituality meets Modern Science </p>
+                        {% if user.is_authenticated %}
+                        <div class="w3l-two-buttons mt-4">
+                            <a href="courses" class="btn btn-primary btn-style"> Try it For Free </a>
+                        </div>
+                        {% else %}
+                        <div class="w3l-two-buttons mt-4">
+                            <a href="login" class="btn btn-primary btn-style"> Try it For Free </a>
+                        </div>
+                        {% endif %}
+
+                        <div class="main-social-footer-29 mt-5">
+                            <a href="https://www.facebook.com/" class="facebook" target="blank"><span class="fab fa-facebook-f"></span></a>
+                            <a href="https://x.com/home?lang=en" class="twitter" target="blank"><span class="fab fa-twitter"></span></a>
+                            <a href="https://www.instagram.com/" class="instagram" target="_blank"><span class="fab fa-instagram"></span></a>
+                            <a href="https://www.linkedin.com/in/akash-tiwari-36a324188/" class="linkedin" target="_blank"><span class="fab fa-linkedin-in"></span></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-list-29 footer-2 mt-sm-0 mt-5">
+
+                        <ul>
+                            <h6 class="footer-title-29">Links</h6>
+                            <li><a href="about">About Us</a></li>
+                            <li><a href="courses">Services</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-list-29 footer-3 mt-lg-0 mt-5">
+                        <h6 class="footer-title-29">Services</h6>
+                        <ul>
+                            <li><a href="#traning">Courses</a></li>
+                            <li><a href="#traning">Skills</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="col-lg-2 col-md-6  footer-list-29 footer-4 mt-lg-0 mt-5">
+                        <h6 class="footer-title-29">More Info</h6>
+                        <ul>
+                            <li><a href="#seo">our email</a></li>
+                            <li><a href="#traning">gurukul@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6  footer-list-29 footer-4 mt-lg-0 mt-5">
+                        <h6 class="footer-title-29">Support</h6>
+                        <ul>
+
+                            <li><a href="#mail">Our Contact</a></li>
+                            <li><a href="#policy">9321xxxx09</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                <p class="copy-footer-29">© 2025 GURUKUL. All rights reserved</p>
+            </div>
+
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function () {
+                    scrollFunction()
+                };
+
+                function scrollFunction() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        document.getElementById("movetop").style.display = "block";
+                    } else {
+                        document.getElementById("movetop").style.display = "none";
+                    }
+                }
+
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }
+
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+
+
+
+    {% block js %}
+    {% endblock %}
+
+
 </body>
+
 </html>

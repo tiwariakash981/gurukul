@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction</title>
+{% extends 'courses/base.html' %}
+{% block title %} Model {% endblock %}
+{% load static %} 
+{% block start %}
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            margin: 0px;
+            padding: 0px;
         }
         form {
             max-width: 500px;
             margin: 0 auto;
+            padding:30px 5px;
         }
         label {
             display: block;
@@ -41,8 +42,8 @@
             font-weight: bold;
         }
     </style>
-</head>
-<body>
+    
+
     <h1>Student Performance Prediction</h1>
     <form method="POST">
         {% csrf_token %}
@@ -103,7 +104,6 @@
     {% if predict  %}
     yes
     Predicted Result: {{ predict }}
-  
     {% endif %}
-</body>
-</html>
+
+    {% endblock %}

@@ -2,70 +2,191 @@
 {% load course_custom_tags %}
 {% load static %}
 {% block title %}
-check-out
+Checkout
 {% endblock %}
 {% block start %}
 <style>
-    .price {
-        font-size: 20px;
+    .checkout-container {
+        background: #F8F9FA;
+        min-height: calc(100vh - 60px);
+        padding: 4rem 0;
     }
 
-    .display-5 {
-        font-size: 35px;
+    .course-card {
+        background: white;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .course-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .course-info {
+        padding: 2rem;
+    }
+
+    .course-title {
+        color: #0D47A1;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .price-tag {
+        background: #F8F9FA;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+    }
+
+    .discount-badge {
+        background: #FF4B4B;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .price {
+        font-size: 1.5rem;
+        color: #2D3748;
+    }
+
+    .price del {
+        color: #718096;
+        font-size: 1.1rem;
+    }
+
+    .checkout-details {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .checkout-title {
+        font-size: 2rem;
+        color: #2D3748;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .amount-section {
+        background: #F8F9FA;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .amount-title {
+        font-size: 1.2rem;
+        color: #4A5568;
+        margin-bottom: 0.5rem;
+    }
+
+    .amount {
+        font-size: 2rem;
+        color: #0D47A1;
+        font-weight: 600;
+    }
+
+    .payment-btn {
+        background: #0D47A1;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        border: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .payment-btn:hover {
+        background: #0A3679;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .checkout-container {
+            padding: 2rem 1rem;
+        }
+        
+        .course-card {
+            margin-bottom: 2rem;
+        }
     }
 </style>
-<link rel="stylesheet" href="{% static 'courses/css/common.css' %}">
-<div class="container">
-    <br><br>
 
-    <div class="row">
-        <div class="col mx-auto">
-            <div class="card ms-auto" style="width: 18rem;">
-                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="no">
-                <div class="card-body">
-                    <h5 class="card-title">{{course.name}}</h5>
-                    <p class="card-text m-0 p-0">
-                        Save {{course.discount}}%
-                        <br>
-                        <span class="price">
-                            <del> {{course.price | rupee}} </del>
-                            &nbsp;
-                            <span> {% cal_sellprice course.price course.discount as value %}
+<div class="checkout-container">
+    <div class="container">
+        <div class="row">
+            <!-- Course Card -->
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="{{course.thumbnail.url}}" alt="{{course.name}}">
+                    <div class="course-info">
+                        <h5 class="course-title">{{course.name}}</h5>
+                        <div class="price-tag">
+                            <div class="discount-badge">
+                                Save {{course.discount}}%
+                            </div>
+                            <div class="price">
+                                <del>{{course.price | rupee}}</del>
+                                <br>
+                                {% cal_sellprice course.price course.discount as value %}
                                 {{value | rupee}}
-
-                            </span>
-                        </span>
-                    </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
+            <!-- Checkout Details -->
+            <div class="col-md-8">
+                <div class="checkout-details">
+                    <h2 class="checkout-title">{{course.name}}</h2>
+                    <hr>
+                    <div class="amount-section">
+                        <div class="amount-title">Payable Amount</div>
+                        <div class="amount">
+                            {% cal_sellprice course.price course.discount as value %}
+                            {{value | rupee}}
+                        </div>
+                    </div>
+                    <a class="payment-btn" href="?action=create_payment">
+                        Continue to Payment
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="col">
-            <div>
-                <p class="display-5">{{course.name}}</p>
-                <hr>
-                <p class="display-5"> Payable Amount: <b>{% cal_sellprice course.price course.discount as value %}
-                        {{value | rupee}}</b> </p>
-                <a class="btn btn-light border" href="?action=create_payment">Continue to payment</a>
-            </div>
-        </div>
-
     </div>
-
 </div>
 
 {% if order is not None %}
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
 <script>
     var options = {
-        "key": "rzp_test_RioZ8JNo07BL1A", // Enter the Key ID generated from the Dashboard
+        "key": "rzp_test_RioZ8JNo07BL1A",
         "name": "Gurukul",
         "description": "Payment for {{course.name}}",
         "image": "https://ilogo.in/ajax/thumbnail.php?id=204715&width=540&height=540&face=front&force=1",
-        "order_id": "{{order.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        "callback_url":'http://localhost:8000/verify_payment',
+        "order_id": "{{order.id}}",
+        "callback_url": 'http://localhost:8000/verify_payment',
         "prefill": {
             "name": "{{user.first_name}}",
             "email": "{{user.email}}",
@@ -74,22 +195,19 @@ check-out
             "address": "Razorpay Corporate Office"
         },
         "theme": {
-            "color": "#3399cc"
+            "color": "#0D47A1"
         }
     };
     var rzp1 = new Razorpay(options);
     rzp1.open();
-
-
 </script>
 {% endif %}
 
 {% if error is not None %}
 <script>
-    window.onload = ()=>{
+    window.onload = () => {
         alert('{{error}}')
     }
-</script>  
-
+</script>
 {% endif %}
 {% endblock %}

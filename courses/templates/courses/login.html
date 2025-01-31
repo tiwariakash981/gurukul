@@ -39,7 +39,7 @@
     height: 100px;
     margin: 0 auto;
     margin-top: -3em;
-    background: #3e4684;
+    background: #0B3D91;
     border-radius: 50%;
     padding: 1em;
   }
@@ -86,7 +86,7 @@
 
   .screen-1 .login {
     padding: 1em;
-    background: #3e4684;
+    background: #0B3D91;
     color: white;
     border: none;
     border-radius: 30px;
@@ -114,7 +114,7 @@
   }
 
   .screen-1 .footer span:hover {
-    color: #3e4684;
+    color: #0B3D91;
   }
 
   /* Style Django form fields */
@@ -122,6 +122,9 @@
   .screen-1 #id_password {
     background: transparent;
     width: 100%;
+  }
+  .cursors{
+    cursor:none !important;
   }
 </style>
 {% endblock %}
@@ -160,7 +163,7 @@
     
     <div class="footer">
       <span><a href="/signup">Signup</a></span>
-      <span>Forgot Password?</span>
+      <span class='cursors'><--New User?</span>
     </div>
   </div>
 </div>

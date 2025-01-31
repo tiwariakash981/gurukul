@@ -710,6 +710,7 @@ progress {
 }
 
 .row > * {
+    margin-top:70px !important;
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
@@ -4966,7 +4967,8 @@ fieldset:disabled .btn {
 .card-img,
 .card-img-top {
     border-top-left-radius: calc(.25rem - 1px);
-    border-top-right-radius: calc(.25rem - 1px)
+    border-top-right-radius: calc(.25rem - 1px);
+    margin: 24px 0px 0px 0px;
 }
 
 .card-img,
@@ -7573,7 +7575,8 @@ fieldset:disabled .btn {
 }
 
 .justify-content-center {
-    justify-content: center !important
+    justify-content: center !important;
+    margin:10px auto !important;
 }
 
 .justify-content-between {

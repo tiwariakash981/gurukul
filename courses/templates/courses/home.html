@@ -1,56 +1,196 @@
 {% extends 'courses/base.html' %}
 {% load course_custom_tags %}
 {% block title %}
-home
+Courses
 {% endblock %}
 {% block start %}
 
 <style>
+    /* Hero Section Styles */
+    .courses-hero {
+        background-color: #f8f9fa;
+        padding: 100px 0px 0px 0px ;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .courses-hero h1 {
+        color: #0A2647;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .courses-hero p {
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+    }
+
+    /* Courses Grid Styles */
+    .courses-container {
+        max-width: calc(100% - 200px); /* 100px margin from both sides */
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .course-card {
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        color: #0B3D91;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+    }
+
+    .price-section {
+        margin-top: auto;
+    }
+
+    .discount-badge {
+        background: #0A2647;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
     .price {
-        font-size: 20px;
+        font-size: 1.25rem;
+        color: #0A2647;
+        font-weight: 600;
+    }
+
+    .price del {
+        color: #666;
+        font-size: 1rem;
+        font-weight: normal;
+    }
+
+    .card-footer {
+        background: none;
+        border-top: 1px solid #eee;
+        padding: 1rem !important;
+    }
+
+    .action-btn {
+        padding: 0px;
+        margin: 5px ;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-align: center;
+        border-radius: 5px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary-action {
+        background: #0b3d91;
+        color: white;
+        border: none;
+    }
+   
+
+    .btn-primary-action:hover {
+        background: #051C3F;
+        color: white;
+    }
+
+    .btn-secondary-action {
+        background: #f8f9fa;
+        color: #0A2647;
+        border: 1px solid #0A2647;
+    }
+
+    .btn-secondary-action:hover {
+        background: #0A2647;
+        color: white;
     }
 </style>
 
-<div class="container">
-    <br><br>
-    <div class="row">
-        
+<!-- Hero Section -->
+<div class="courses-hero">
+    <div class="container">
+        <h1>Our Courses</h1>
+        <p>Discover a world of knowledge with our comprehensive courses. From beginner to advanced, unlock your potential with personalized learning paths.</p>
+    </div>
+</div>
+
+<!-- Courses Grid -->
+<div class="courses-container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
         {% for course in object_list %}
-        <!-- Each card will occupy 4 columns in medium screens, adjust as needed -->
-        <div class="col-md-4 col-sm-6 col-12 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="no">
+        <div class="col">
+            <div class="course-card">
+                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="{{course.name}}">
                 <div class="card-body">
                     <h5 class="card-title">{{course.name}}</h5>
-                    <p class="card-text m-0 p-0">
-                        Save {{course.discount}}%
-                        <br>
-                        <span class="price">
+                    <div class="price-section">
+                        <div class="discount-badge">
+                            Save {{course.discount}}%
+                        </div>
+                        <p class="price mb-0">
                             <del>{{course.price | rupee}}</del>
                             &nbsp;
-                            <span> {% cal_sellprice course.price course.discount as value %}
+                            <span>
+                                {% cal_sellprice course.price course.discount as value %}
                                 {{value | rupee}}
                             </span>
-                        </span>
-                    </p>
+                        </p>
+                    </div>
                 </div>
 
-                <div class="card-footer p-0">
+                <div class="card-footer">
                     {% is_enrolled request course as enrolled %}
-                    <div class="row no-gutters">
+                    <div class="row g-2">
                         {% if enrolled %}
-                        <div class="col border-right">
-                            <a href="/course/{{course.slug}}" class="btn btn-light w-100">
-                                Start Course</a>
+                        <div class="col-12">
+                            <a href="/course/{{course.slug}}" class="action-btn btn-primary-action w-100">
+                                Start Course
+                            </a>
                         </div>
                         {% else %}
-                        <div class="col border-right">
-                            <a href="/check-out/{{course.slug}}" class="btn btn-light w-100">
-                                Enroll Now</a>
+                        <div class="col-6">
+                            <a href="/check-out/{{course.slug}}" class="action-btn btn-primary-action w-100">
+                                Enroll Now
+                            </a>
                         </div>
-                        <div class="col">
-                            <a href="/course/{{course.slug}}" class="btn btn-light w-100">Show
-                                More</a>
+                        <div class="col-6">
+                            <a href="/course/{{course.slug}}" class="action-btn btn-secondary-action w-100">
+                                Show More
+                            </a>
                         </div>
                         {% endif %}
                     </div>

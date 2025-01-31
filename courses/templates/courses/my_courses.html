@@ -1,41 +1,108 @@
 {% extends 'courses/base.html' %}
 {% load course_custom_tags %}
 {% block title %}
-test
+My Courses
 {% endblock %}
 {% block start %}
-<div class="container">
-    <p class="display-6">My Courses</p>
-   
-    <div class="row">
+
+<style>
+
+
+    .courses-grid {
+        padding: 40px 0;
+    }
+
+    .course-card {
+        background: white;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .course-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .course-card .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+    }
+
+    .start-course-btn {
+        background: #0D47A1;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .start-course-btn:hover {
+        background: #1565C0;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .card-footer {
+        background: none;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding: 1rem !important;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #666;
+    }
+</style>
+
+<!-- Hero Section -->
+
+
+<div class="container courses-grid">
+    {% if user_courses %}
+    <div class="row g-4">
         {% for uc in user_courses %}
-        <!-- Each card will occupy 4 columns in medium screens, adjust as needed -->
-        <div class="col-md-4 col-sm-6 col-12 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
-                <img src="{{uc.course.thumbnail.url}}" class="card-img-top" alt="no">
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="course-card card">
+                <img src="{{uc.course.thumbnail.url}}" class="card-img-top" alt="{{uc.course.name}}">
                 <div class="card-body">
                     <h5 class="card-title">{{uc.course.name}}</h5>
-                    
                 </div>
-
-                <div class="card-footer p-0">
-                    
-                    <div class="row no-gutters">
-                       
-                        <div class="col border-right">
-                            <a href="/course/{{uc.course.slug}}" class="btn btn-light w-100">
-                                Start Course</a>
-                        </div>
-                        
-                        
+                <div class="card-footer">
+                    <div class="d-grid">
+                        <a href="/course/{{uc.course.slug}}" class="start-course-btn text-center text-decoration-none">
+                            Start Course
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>No courses enrolled yet</h3>
+        <p>Browse our course catalog to start your learning journey</p>
+        <a href="/courses" class="start-course-btn text-decoration-none">Explore Courses</a>
+    </div>
+    {% endif %}
 </div>
-
-
 
 {% endblock %}
